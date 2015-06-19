@@ -78,31 +78,15 @@ angular.module('jrContainer', [])
 
                 $scope.jrContainer = {east: [], west: [], south: []};
 
-                containerElement.find('.jrWestTabs li').each(function() {
-                    var tab = jQuery(this);
-                    var id = tab.data('guid');
-                    angular.forEach(prevTabConfigs, function(prevTab) {
-                        if(id === prevTab.guid) {
-                            $scope.jrContainer.west.push(prevTab);
-                        }
-                    });
-                });
-                containerElement.find('.jrEastTabs li').each(function() {
-                    var tab = jQuery(this);
-                    var id = tab.data('guid');
-                    angular.forEach(prevTabConfigs, function(prevTab) {
-                        if(id === prevTab.guid) {
-                            $scope.jrContainer.east.push(prevTab);
-                        }
-                    });
-                });
-                containerElement.find('.jrSouthTabs li').each(function() {
-                    var tab = jQuery(this);
-                    var id = tab.data('guid');
-                    angular.forEach(prevTabConfigs, function(prevTab) {
-                        if(id === prevTab.guid) {
-                            $scope.jrContainer.south.push(prevTab);
-                        }
+                angular.forEach($scope.jrContainer, function(tabs, zoneName) {
+                    containerElement.find('.jr'+ucfirst(zoneName)+'Tabs li').each(function() {
+                        var tab = jQuery(this);
+                        var id = tab.data('guid');
+                        angular.forEach(prevTabConfigs, function(prevTab) {
+                            if(id === prevTab.guid) {
+                                $scope.jrContainer[zoneName].push(prevTab);
+                            }
+                        });
                     });
                 });
 
@@ -121,20 +105,13 @@ angular.module('jrContainer', [])
 
             var config = $scope.jrContainer;
 
-            angular.forEach(config.east, function(tabConfig, indx) {
-                config.east[indx].guid = guid();
-                var newTab = jQuery("<li data-guid=\""+config.east[indx].guid+"\"><a href=\"\">" + tabConfig.title + "</a></li>");
-                containerElement.find('.jrEastTabs').append(newTab);
-            });
-            angular.forEach(config.west, function(tabConfig, indx) {
-                config.west[indx].guid = guid();
-                var newTab = jQuery("<li data-guid=\""+config.west[indx].guid +"\"><a href=\"\">" + tabConfig.title + "</a></li>");
-                containerElement.find('.jrWestTabs').append(newTab);
-            });
-            angular.forEach(config.south, function(tabConfig, indx) {
-                config.south[indx].guid = guid();
-                var newTab = jQuery("<li data-guid=\""+config.south[indx].guid +"\"><a href=\"\">" + tabConfig.title + "</a></li>");
-                containerElement.find('.jrSouthTabs').append(newTab);
+            angular.forEach($scope.jrContainer, function(tabs, zoneName) {
+                angular.forEach(config[zoneName], function (tabConfig, indx) {
+                    var id = guid();
+                    config[zoneName][indx].guid = id;
+                    var newTab = jQuery("<li data-guid=\"" + id + "\"><a href=\"\">" + tabConfig.title + "</a></li>");
+                    containerElement.find('.jr'+ucfirst(zoneName)+'Tabs').append(newTab);
+                });
             });
 
             var currentlyOpen = {
@@ -216,6 +193,13 @@ angular.module('jrContainer', [])
                     top = sTabs.height() / containerElement.height();
                 }
                 containerElement.find('.jr-horizontal').css('bottom', top*100+'%');
+            }
+
+            function ucfirst(str) {
+                str += '';
+                var f = str.charAt(0)
+                    .toUpperCase();
+                return f + str.substr(1);
             }
         }
 
