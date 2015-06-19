@@ -1,12 +1,44 @@
 <html>
 <head>
     <script src="dist/all.js"></script>
-    <link rel="stylesheet" href="dist/panel.css" />
+    <script>
+        angular
+            .module('demoApp', ['jrContainer'])
+            .directive('exampleDirective', function() {
+                function controller($scope) {
+                    $scope.test = Math.random(1,1000);
+                    console.log($scope.test);
+                }
+
+                return {
+                    controller: controller,
+                    template: '<div>test {{test}}</div>',
+                    restrict: 'A',
+                    scope: {}
+                }
+            })
+            .controller('demoController', function($scope) {
+                $scope.config = {
+                    east: [
+                        {title: 'test 1', content: '<div><div example-directive></div></div>', compile: true},
+                        {title: 'test 2', content: 'hello world 2'}
+                    ],
+                    south: [
+                        {title: 'test 3', content: 'hello world 3'},
+                        {title: 'test 4', content: 'hello world 4'}
+                    ],
+                    west: [
+                        {title: 'test 5', content: 'hello world 5'},
+                        {title: 'test 6', content: 'hello world 6'}
+                    ]
+                }
+            });
+    </script>
     <link rel="stylesheet" href="dist/container.css" />
 </head>
-<body ng-app="jrApp" style="overflow:hidden;">
-<div ng-controller="demoController">
-    <div jr-container="config"></div>
-</div>
+<body ng-app="demoApp" style="overflow:hidden;">
+    <div ng-controller="demoController">
+        <div jr-container="config"></div>
+    </div>
 </body>
 </html>

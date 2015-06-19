@@ -4,7 +4,7 @@ angular.module('jrContainer', [])
 
         }
 
-        function controller($scope, $element) {
+        function controller($scope, $element, $compile) {
             var containerElement = jQuery($element);
 
             function zoneFor(tabsEl) {
@@ -181,7 +181,13 @@ angular.module('jrContainer', [])
                 }
 
                 var itemConfig = $scope.jrContainer[zone.toLowerCase()][item.index()];
-                panel.html(itemConfig.content);
+                if(itemConfig.compile) {
+                    var newScope = $scope.$new();
+                    panel.html($compile(itemConfig.content)(newScope));
+                    newScope.$apply();
+                } else {
+                    panel.html(itemConfig.content);
+                }
                 currentlyOpen[zone.toLowerCase()] = item.index();
                 console.log(currentlyOpen);
 
