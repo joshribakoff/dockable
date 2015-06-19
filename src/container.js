@@ -7,33 +7,9 @@ angular.module('jrContainer', [])
         function controller($scope, $element) {
             var containerElement = jQuery($element);
 
-            $scope.showDropPlaceholder = false;
-
-            $scope.$on('dockLeft', function() {
-                $scope.showDropPlaceholder = 'left';
-                $scope.$apply();
+            containerElement.find('.jrTabs').sortable({
+                connectWith: '.jrTabs'
             });
-            $scope.$on('dockRight', function() {
-                $scope.showDropPlaceholder = 'right';
-                $scope.$apply();
-            });
-            $scope.$on('dockTop', function() {
-                $scope.showDropPlaceholder = 'top';
-                $scope.$apply();
-            });
-            $scope.$on('dockBottom', function() {
-                $scope.showDropPlaceholder = 'bottom';
-                $scope.$apply();
-            });
-            $scope.$on('float', function() {
-                $scope.showDropPlaceholder = 'float';
-                $scope.$apply();
-            });
-
-            $scope.$on('onStop', function() {
-                $scope.showDropPlaceholder = false;
-                $scope.$apply();
-            })
         }
 
         return {

@@ -1,28 +1,86 @@
+@tab-bar-thickness: 25px;
+
 .jr-container {
   border:1px orange solid;
   width:80%;
   height:80%;
   position:relative;
   overflow:hidden;
-  .jr-drop-left, .jr-drop-right, .jr-drop-top, .jr-drop-bottom, .jr-drop-float {
-    background:rgba(255, 0, 0, 0.1);
-    border:1px orange solid;
+
+  .jrWestTabs {
+    background:#fff;
     position:absolute;
-    top:0;
     left:0;
-    right:0;
+    top:0;
     bottom:0;
+    width:@tab-bar-thickness;
+    border:1px #eee solid;
+    margin:0;
+    padding:0;
+    li {
+      list-style-type: none;
+    }
+    a {
+      display:inline-block;
+      border:1px green solid;
+      width:100px;
+      height:20px;
+      margin-top:42px;
+      margin-bottom:40px;
+      text-align: center;
+      transform: rotate(-90deg) translateY(-39px);
+      white-space: nowrap;
+    }
   }
-  .jr-drop-left {
-    right:80%;
+
+  .jrEastTabs {
+    background:#fff;
+    position:absolute;
+    right:0;
+    top:0;
+    bottom:0;
+    width:@tab-bar-thickness;
+    border:1px #eee solid;
+    margin:0;
+    padding:0;
+    li {
+      list-style-type: none;
+    }
+    a {
+      display:inline-block;
+      border:1px green solid;
+      width:100px;
+      height:20px;
+      margin-top:42px;
+      margin-bottom:40px;
+      text-align: center;
+      transform: rotate(-90deg) translateY(-39px);
+      white-space: nowrap;
+    }
   }
-  .jr-drop-right {
-    left:80%;
-  }
-  .jr-drop-top {
-    bottom:80%;
-  }
-  .jr-drop-bottom {
-    top:80%;
+
+  .jrSouthTabs {
+    background:#fff;
+    position:absolute;
+    left:0;
+    bottom:0;
+    right:0;
+    height:@tab-bar-thickness;
+    border:1px #eee solid;
+    margin:0;
+    padding:0;
+    li {
+      list-style-type:none;
+      display: inline-block;
+      float:left;
+    }
+    a {
+      display: inline-block;
+      border:1px green solid;
+      width:100px;
+      height:20px;
+      margin-left:3px;
+      margin-top:2px;
+    }
   }
 }
