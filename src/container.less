@@ -86,6 +86,7 @@
 
   .jrPanel {
     background:#fff;
+    overflow:hidden;
   }
 
   .jrPanelWest {
@@ -94,8 +95,7 @@
     top:0;
     left:0 + @tab-bar-thickness;
     bottom:0;
-
-    width:100px;
+    right:80%;
     border:1px red solid;
     &.jrPanelOpen {
       display:block;
@@ -108,8 +108,7 @@
     top:0;
     right:0 + @tab-bar-thickness;
     bottom:0;
-
-    width:100px;
+    left:80%;
     border:1px red solid;
     &.jrPanelOpen {
       display:block;
@@ -123,8 +122,7 @@
     left:0;
     right:0;
     bottom:0 + @tab-bar-thickness;
-
-    height:100px;
+    top:80%;
     border:1px red solid;
     &.jrPanelOpen {
       display:block;

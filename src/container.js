@@ -24,6 +24,10 @@ angular.module('jrContainer', [])
 
             var draggingGuid = false;
 
+            containerElement.find('.jrPanelSouth').resizable({handles: 'n'});
+            containerElement.find('.jrPanelEast').resizable({handles: 'w'});
+            containerElement.find('.jrPanelWest').resizable({handles: 'e'});
+
             containerElement.find('.jrTabs')
                 .sortable({
                     connectWith: '.jrTabs',
@@ -170,11 +174,12 @@ angular.module('jrContainer', [])
                 var itemConfig = $scope.jrContainer[zone.toLowerCase()][item.index()];
                 if(itemConfig.compile) {
                     var newScope = $scope.$new();
-                    panel.html($compile(itemConfig.content)(newScope));
+                    panel.find('.jrPanelContents').html($compile(itemConfig.content)(newScope));
                     newScope.$apply();
                 } else {
-                    panel.html(itemConfig.content);
+                    panel.find('.jrPanelContents').html(itemConfig.content);
                 }
+
                 currentlyOpen[zone.toLowerCase()] = item.index();
                 console.log(currentlyOpen);
 
@@ -201,6 +206,7 @@ angular.module('jrContainer', [])
                     .toUpperCase();
                 return f + str.substr(1);
             }
+
         }
 
         return {
