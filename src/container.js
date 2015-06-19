@@ -171,7 +171,17 @@ angular.module('jrContainer', [])
                 } else if(panel.data('guid') === item.data('guid')) {
                     panel.removeClass('jrPanelOpen');
 
-                    // flag the panel as not expanded in the config
+                    // flag the panel as NOT expanded in the config
+                    angular.forEach($scope.jrContainer[zone.toLowerCase()], function(tabConfig) {
+                        if(tabConfig.guid === item.data('guid')) {
+                            tabConfig.isExpanded = false;
+                            $scope.$apply();
+                        }
+                    });
+                } else {
+                    panel.data('guid', item.data('guid'));
+
+                    // flag the panel as expanded in the config
                     angular.forEach($scope.jrContainer[zone.toLowerCase()], function(tabConfig) {
                         if(tabConfig.guid === item.data('guid')) {
                             tabConfig.isExpanded = true;
