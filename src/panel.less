@@ -1,0 +1,24 @@
+.jr-panel {
+  position:absolute;
+  width:auto;
+  height:auto;
+  border:1px #333 solid;
+  .jr-panel-header {
+    background:#eee;
+  }
+  .jr-collapsed-bar {
+    display:none;
+  }
+  .jr-panel-header, .jr-panel-contents {
+    display:block;
+  }
+
+  &.jr-collapsed {
+    .jr-collapsed-bar {
+      display:block;
+    }
+    .jr-panel-header, .jr-panel-contents {
+      display:none;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.jr-container {
+  border:1px orange solid;
+  width:80%;
+  height:80%;
+  position:relative;
+  overflow:hidden;
+  .jr-drop-left, .jr-drop-right, .jr-drop-top, .jr-drop-bottom, .jr-drop-float {
+    background:rgba(255, 0, 0, 0.1);
+    border:1px orange solid;
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+  }
+  .jr-drop-left {
+    right:80%;
+  }
+  .jr-drop-right {
+    left:80%;
+  }
+  .jr-drop-top {
+    bottom:80%;
+  }
+  .jr-drop-bottom {
+    top:80%;
+  }
+}
