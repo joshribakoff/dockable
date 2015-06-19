@@ -24,20 +24,27 @@ angular.module('jrContainer', [])
 
             var draggingGuid = false;
 
+            function resized() {
+                updateHorizontalHeight();
+                updateMainPanelPosition();
+            }
+
+            jQuery(window).on('resize', resized);
+
             containerElement.find('.jrPanelSouth').resizable({
                 handles: 'n',
-                resize: updateHorizontalHeight,
-                stop: updateHorizontalHeight
+                resize: resized,
+                stop: resized
             });
             containerElement.find('.jrPanelEast').resizable({
                 handles: 'w',
-                resize: updateHorizontalHeight,
-                stop: updateHorizontalHeight
+                resize: resized,
+                stop: resized
             });
             containerElement.find('.jrPanelWest').resizable({
                 handles: 'e',
-                resize: updateHorizontalHeight,
-                stop: updateHorizontalHeight
+                resize: resized,
+                stop: resized
             });
 
             containerElement.find('.jrTabs')
@@ -202,6 +209,8 @@ angular.module('jrContainer', [])
                 if('South' == zone) {
                     updateHorizontalHeight();
                 }
+
+                updateMainPanelPosition();
             });
 
             function updateHorizontalHeight() {
@@ -223,6 +232,28 @@ angular.module('jrContainer', [])
                 return f + str.substr(1);
             }
 
+            function updateMainPanelPosition() {
+                var leftEdge = containerElement.find('.jrWestTabs').width();
+                if(containerElement.find('.jrPanelWest').is(":visible")) {
+                    leftEdge += containerElement.find('.jrPanelWest').width();
+                }
+                
+                var rightEdge = containerElement.find('.jrEastTabs').width();
+                if(containerElement.find('.jrPanelEast').is(":visible")) {
+                    rightEdge += containerElement.find('.jrPanelEast').width();
+                }
+
+                var bottomEdge = containerElement.find('.jrSouthTabs').height();
+                if(containerElement.find('.jrPanelSouth').is(":visible")) {
+                    bottomEdge += containerElement.find('.jrPanelSouth').height();
+                }
+
+                containerElement.find('.jrMainPanel').css({
+                    left: leftEdge,
+                    bottom: bottomEdge,
+                    right: rightEdge+1
+                });
+            }
         }
 
         return {
