@@ -24,9 +24,21 @@ angular.module('jrContainer', [])
 
             var draggingGuid = false;
 
-            containerElement.find('.jrPanelSouth').resizable({handles: 'n'});
-            containerElement.find('.jrPanelEast').resizable({handles: 'w'});
-            containerElement.find('.jrPanelWest').resizable({handles: 'e'});
+            containerElement.find('.jrPanelSouth').resizable({
+                handles: 'n',
+                resize: updateHorizontalHeight,
+                stop: updateHorizontalHeight
+            });
+            containerElement.find('.jrPanelEast').resizable({
+                handles: 'w',
+                resize: updateHorizontalHeight,
+                stop: updateHorizontalHeight
+            });
+            containerElement.find('.jrPanelWest').resizable({
+                handles: 'e',
+                resize: updateHorizontalHeight,
+                stop: updateHorizontalHeight
+            });
 
             containerElement.find('.jrTabs')
                 .sortable({
@@ -132,12 +144,15 @@ angular.module('jrContainer', [])
                 var zone = zoneFor(parentTabs);
                 var panel = containerElement.find('.jrPanel' + zone);
 
+                parentTabs.find('li').removeClass('jrActive');
+
                 // set the flag for all panels to not expanded in the config
                 angular.forEach($scope.jrContainer[zone.toLowerCase()], function(tabConfig) {
                     tabConfig.isExpanded = false;
                 });
 
                 if(!panel.hasClass('jrPanelOpen')) {
+                    item.addClass('jrActive');
                     panel.addClass('jrPanelOpen');
                     panel.data('guid', item.data('guid'));
 
@@ -150,6 +165,7 @@ angular.module('jrContainer', [])
                     });
 
                 } else if(panel.data('guid') === item.data('guid')) {
+                    item.removeClass('jrActive');
                     panel.removeClass('jrPanelOpen');
 
                     // flag the panel as NOT expanded in the config
@@ -160,6 +176,7 @@ angular.module('jrContainer', [])
                         }
                     });
                 } else {
+                    item.addClass('jrActive');
                     panel.data('guid', item.data('guid'));
 
                     // flag the panel as expanded in the config
@@ -181,7 +198,6 @@ angular.module('jrContainer', [])
                 }
 
                 currentlyOpen[zone.toLowerCase()] = item.index();
-                console.log(currentlyOpen);
 
                 if('South' == zone) {
                     updateHorizontalHeight();
