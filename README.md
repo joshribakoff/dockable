@@ -10,7 +10,7 @@ Similar to "border layout" from Java, you've seen the UI pattern in your IDE. Th
 
 This "dockable" directive gives you the ability to have docked panels on the sides of your app. Panels can be collapsed or expanded by clicking on the associated tab. Tabs can be dragged & dropped to re-order them or move them from one edge of the screen to the other.
 
-Depends on AngularJS, jQuery & jQuery-ui (sortable)
+Depends on AngularJS, jQuery & jQuery-ui (sortable, resizable)
 
 Usage:
 
