@@ -4,7 +4,7 @@ angular.module('jrContainer', [])
 
         }
 
-        function controller($scope, $element, $compile) {
+        function controller($scope, $element, $compile, $timeout) {
             var containerElement = jQuery($element);
 
             function zoneFor(tabsEl) {
@@ -87,7 +87,7 @@ angular.module('jrContainer', [])
                             panelToMove = false;
                         }
 
-                        updateHorizontalHeight();
+                        resized();
                     }
                 });
 
@@ -233,12 +233,18 @@ angular.module('jrContainer', [])
             }
 
             function updateMainPanelPosition() {
-                var leftEdge = containerElement.find('.jrWestTabs').width();
+                var leftEdge = 0;
+                if(containerElement.find('.jrWestTabs').is(":visible")) {
+                    leftEdge = containerElement.find('.jrWestTabs').width();
+                }
                 if(containerElement.find('.jrPanelWest').is(":visible")) {
                     leftEdge += containerElement.find('.jrPanelWest').width();
                 }
                 
-                var rightEdge = containerElement.find('.jrEastTabs').width();
+                var rightEdge = 0;
+                if(containerElement.find('.jrEastTabs').is(":visible")) {
+                    rightEdge += containerElement.find('.jrEastTabs').width();
+                }
                 if(containerElement.find('.jrPanelEast').is(":visible")) {
                     rightEdge += containerElement.find('.jrPanelEast').width();
                 }
