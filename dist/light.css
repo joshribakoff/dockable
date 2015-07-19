@@ -1,0 +1,21 @@
+.jr-container {
+  background: #e1e1e1;
+  color: #000;
+}
+.jr-container .jrTabs {
+  background: #fafafa;
+}
+.jr-container .jrTabs a {
+  text-decoration: none;
+  color: #000;
+}
+.jr-container .jrTabs li:hover {
+  background: #e1e1e1;
+}
+.jr-container .jrTabs li.jrActive {
+  background: #e1e1e1;
+}
+.jr-container .jrPanel {
+  background: #e1e1e1;
+}
+/*# sourceMappingURL=light.css.map */
