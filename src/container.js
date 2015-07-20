@@ -87,7 +87,7 @@ angular.module('jrContainer', [])
                             panelToMove = false;
                         }
 
-                        resized();
+                        jQuery(window).trigger('resize');
                     }
                 });
 
@@ -211,6 +211,7 @@ angular.module('jrContainer', [])
                 }
 
                 updateMainPanelPosition();
+                jQuery(window).trigger('resize');
             });
 
             function updateHorizontalHeight() {
